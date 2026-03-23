@@ -1,9 +1,12 @@
 import type {
+  CodePosition,
   ProblemDetail,
   ProblemFileCreateResponse,
   ProblemFileContent,
   ProblemFileTreeResponse,
   ProblemSummary,
+  PythonCompletionResponse,
+  PythonHoverResponse,
   QueuedSubmissionResponse,
   SubmissionDetail,
 } from "../types";
@@ -65,6 +68,28 @@ export const api = {
         kind,
         parent_path: parentPath ?? null,
       }),
+    });
+  },
+  getPythonCompletions(
+    problemId: string,
+    code: string,
+    path: string,
+    position: CodePosition,
+  ): Promise<PythonCompletionResponse> {
+    return request(`/api/problems/${problemId}/intellisense/python`, {
+      method: "POST",
+      body: JSON.stringify({ code, path, position }),
+    });
+  },
+  getPythonHover(
+    problemId: string,
+    code: string,
+    path: string,
+    position: CodePosition,
+  ): Promise<PythonHoverResponse> {
+    return request(`/api/problems/${problemId}/intellisense/python/hover`, {
+      method: "POST",
+      body: JSON.stringify({ code, path, position }),
     });
   },
   executeProblem(

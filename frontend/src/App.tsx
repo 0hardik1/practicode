@@ -112,6 +112,7 @@ export default function App() {
   const [workspaceMainLeftSize, setWorkspaceMainLeftSize] = useState(58);
   const workspaceGridRef = useRef<HTMLElement | null>(null);
   const workspaceMainRef = useRef<HTMLDivElement | null>(null);
+  const pendingFileActivationRef = useRef<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -295,6 +296,7 @@ export default function App() {
   async function loadFileContent(problemId: string, path: string) {
     const existingTab = openFileTabs[path];
     if (existingTab) {
+      pendingFileActivationRef.current = path;
       setSelectedFilePath(path);
       setActiveEditorTabId(path);
       return;
@@ -319,7 +321,9 @@ export default function App() {
         },
       }));
       setOpenFileOrder((current) => (current.includes(path) ? current : [...current, path]));
-      setActiveEditorTabId(path);
+      if (pendingFileActivationRef.current === path) {
+        setActiveEditorTabId(path);
+      }
     } catch (error) {
       setSelectedFilePath(path);
       setFileError(getErrorMessage(error));
@@ -341,6 +345,7 @@ export default function App() {
     }
 
     setSelectedFilePath(node.path);
+    pendingFileActivationRef.current = node.path;
     await loadFileContent(selectedProblem.id, node.path);
   }
 
@@ -421,6 +426,17 @@ export default function App() {
     }
   }
 
+  function handleSaveActiveTab() {
+    if (activeEditorTabId === SOLUTION_TAB_ID) {
+      if (selectedProblem) {
+        window.localStorage.setItem(storageKey(selectedProblem.id), code);
+      }
+      return;
+    }
+
+    void handleSaveFile();
+  }
+
   function handleEditorChange(value: string) {
     if (activeEditorTabId === SOLUTION_TAB_ID) {
       setCode(value);
@@ -443,6 +459,7 @@ export default function App() {
   }
 
   function handleSelectEditorTab(tabId: string) {
+    pendingFileActivationRef.current = tabId;
     setActiveEditorTabId(tabId);
     if (tabId !== SOLUTION_TAB_ID) {
       setSelectedFilePath(tabId);
@@ -461,6 +478,7 @@ export default function App() {
       const nextOrder = current.filter((id) => id !== tabId);
       if (activeEditorTabId === tabId) {
         const fallbackTab = nextOrder[Math.max(0, closingIndex - 1)] ?? SOLUTION_TAB_ID;
+        pendingFileActivationRef.current = fallbackTab;
         setActiveEditorTabId(fallbackTab);
         if (fallbackTab !== SOLUTION_TAB_ID) {
           setSelectedFilePath(fallbackTab);
@@ -469,6 +487,21 @@ export default function App() {
       return nextOrder;
     });
   }
+
+  useEffect(() => {
+    function handleWindowKeyDown(event: KeyboardEvent) {
+      if (!(event.metaKey || event.ctrlKey) || event.key.toLowerCase() !== "s") {
+        return;
+      }
+      event.preventDefault();
+      handleSaveActiveTab();
+    }
+
+    window.addEventListener("keydown", handleWindowKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleWindowKeyDown);
+    };
+  }, [activeEditorTabId, code, selectedProblem, openFileTabs]);
 
   const solvedProblemIds = new Set([
     ...history
@@ -612,12 +645,13 @@ export default function App() {
                 isFileLoading={isFileLoading}
                 isFileSaving={isFileSaving}
                 liveStatus={liveStatus}
+                problemId={selectedProblem.id}
                 onActiveTabChange={handleSelectEditorTab}
                 onCloseTab={handleCloseEditorTab}
                 onCodeChange={handleEditorChange}
                 onRunCode={() => void handleExecute("execute")}
                 onRun={() => void handleExecute("run")}
-                onSaveFile={() => void handleSaveFile()}
+                onSaveFile={handleSaveActiveTab}
                 onSubmit={() => void handleExecute("submit")}
                 tabs={editorTabs}
               />
