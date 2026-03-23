@@ -1,48 +1,106 @@
 # PractiCode
 
-PractiCode is a local-first coding assessment platform for practical engineering exercises. This repository currently contains the first backend implementation slice:
+PractiCode is a local-first coding assessment platform for practical engineering exercises. It combines a LeetCode/Codesignal-style browser workspace with runnable multi-step problems, mock external services, and a one-command local Kubernetes setup.
 
-- `api-server/`: problem catalog, submission tracking, and executor callbacks
-- `code-executor/`: local execution orchestration with a spec-aligned execution payload
-- `runner-python/`: execution harness and validators
-- `challenges/`: mock services used by the starter problems
-- `problems/`: seeded problem definitions
+![PractiCode workspace screenshot](docs/images/practicode-workspace.png)
 
-## Current State
+## Problem It Solves
 
-The implementation is intentionally local-first for the first pass:
+Most coding platforms are strong at algorithm questions but weak at realistic engineering tasks. PractiCode is designed for assessments that look more like real work:
 
-- the API server defaults to SQLite so it can run without PostgreSQL
-- the code executor defaults to a local subprocess runner instead of Kubernetes Jobs
-- service configuration keeps the structure needed for the later Kind/Kubernetes rollout
+- calling external APIs
+- handling auth flows
+- transforming structured data
+- inspecting and editing multiple files
+- debugging against visible test output
+- working inside an IDE-like browser UI instead of a single textarea
 
-The next major slice is the browser UI and cluster manifests that wire these pieces together inside Kind.
+The goal is to make it easy to author and run hands-on assessments locally before pushing them toward a more production-like environment.
 
-## Setup
+## High-Level Architecture
 
-The repository now has a single bootstrap command for the current stack:
+PractiCode currently runs as a small local cluster on Kind. The browser UI talks to a FastAPI backend, which manages problems and submissions, dispatches execution work, and coordinates with a Python runner plus problem-specific mock services.
+
+```mermaid
+flowchart LR
+    UI[Frontend UI<br/>React + Monaco] --> API[API Server<br/>FastAPI]
+    API --> DB[(SQLite)]
+    API --> EXEC[Code Executor]
+    EXEC --> RUNNER[Python Runner]
+    RUNNER --> CHALLENGES[Mock Services<br/>OAuth / Data API / Image Service]
+    API --> PROBLEMS[Problem Bundles<br/>specs, starter code, tests, assets]
+    PROBLEMS --> UI
+```
+
+## Main Components
+
+| Path | Purpose |
+| --- | --- |
+| `frontend/` | Browser UI with problem navigation, Monaco editor, file explorer, run/test/submit actions, and execution results |
+| `api-server/` | Problem catalog, file APIs, submission tracking, and execution orchestration |
+| `code-executor/` | Execution service that prepares jobs for the language runner |
+| `runner-python/` | Python harness and validators used to execute user code and score results |
+| `challenges/` | Mock services used by practical problems such as OAuth, data retrieval, and image processing |
+| `problems/` | Seeded problem definitions, starter code, tests, docs, and related assets |
+| `k8s/` | Kubernetes manifests for the full local stack |
+| `scripts/` | Bootstrap scripts used by the Make targets |
+
+## Quick Start
+
+### 1. Prerequisites
+
+Install these locally first:
+
+- `docker`
+- `kind`
+- `kubectl`
+- `python3`
+- `make`
+
+### 2. Bootstrap Everything
 
 ```bash
 make setup
 ```
 
-That command will:
+`make setup` is the main entrypoint. It runs `make clean` first, then performs the full environment bootstrap:
 
-- verify local prerequisites (`docker`, `kind`, `kubectl`, `python3`, `make`)
-- create `.venv` and install all Python requirements
-- create the `practicode` Kind cluster if needed
-- build and load all backend images
-- apply Kubernetes manifests
-- seed all problems
-- start background port-forwards for:
-  - the UI at `http://localhost:3000`
-  - the API docs at `http://localhost:8000/docs`
+1. verifies local prerequisites and Docker availability
+2. creates `.venv`
+3. installs all Python dependencies from `requirements-dev.txt`
+4. creates or recreates the `practicode` Kind cluster
+5. builds all required Docker images
+6. loads those images into Kind
+7. deploys the Kubernetes manifests
+8. seeds all bundled problems
+9. starts background port-forwards for the frontend and API
 
-Run `make help` to see the full list of supported commands.
+Once it finishes:
 
-## Local Development
+- UI: `http://localhost:3000`
+- API docs: `http://localhost:8000/docs`
 
-If you want to run the services directly outside Kind, use separate shells:
+To see all supported targets:
+
+```bash
+make help
+```
+
+## Useful Make Targets
+
+| Command | What it does |
+| --- | --- |
+| `make setup` | Full clean bootstrap for the local cluster and UI |
+| `make setup-from-scratch` | Bootstrap without the initial clean step |
+| `make status` | Show pods and services across namespaces |
+| `make verify` | Run syntax-only verification over the Python services |
+| `make stop-port-forward` | Stop the background UI and API forwards |
+| `make teardown` | Delete the Kind cluster |
+| `make clean` | Alias for `make teardown` |
+
+## Local Service Development
+
+If you want to run pieces outside Kind, the repository also supports direct local service startup:
 
 ```bash
 make run-oauth
@@ -52,17 +110,17 @@ make run-executor
 make run-api
 ```
 
-The API server seeds problems from `problems/` on startup.
+The API server seeds problems from `problems/` on startup, and the local stack uses SQLite by default to keep iteration simple.
 
-## Current Kind Scope
+## Current Scope
 
-`make setup` provisions the current implementation on Kind:
+The current repository includes:
 
-- frontend
-- API server
-- code executor
-- oauth mock
-- data API
-- image service
+- a VSCode-inspired browser assessment UI
+- a problem workspace with docs, files, and editable code tabs
+- run, test, and submit flows
+- problem-scoped assets and file editing
+- seeded warmup and practical multi-service problems
+- a one-command Kind deployment path for local use
 
-The browser frontend and Postgres-backed cluster deployment from the full spec are not implemented yet.
+It is optimized for local development and assessment iteration first, with room to evolve toward a more production-like hosted setup later.
