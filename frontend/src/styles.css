@@ -457,10 +457,15 @@ button {
   gap: 8px;
   padding: 0 18px 12px;
   overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+  scrollbar-width: thin;
 }
 
 .editor-tab {
   min-width: 0;
+  max-width: 220px;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   gap: 2px;
@@ -483,6 +488,8 @@ button {
 }
 
 .editor-tab-button {
+  display: flex;
+  align-items: center;
   min-width: 0;
   padding: 7px 10px;
   font-size: 0.86rem;
@@ -490,10 +497,14 @@ button {
 
 .editor-tab-label {
   display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .editor-tab-close {
+  flex: 0 0 auto;
   padding: 7px 8px 7px 0;
   color: var(--text-muted);
 }

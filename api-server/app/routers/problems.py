@@ -13,6 +13,10 @@ from app.config import get_settings
 from app.db import get_session
 from app.models import Problem, TestCase
 from app.schemas import (
+    PythonCompletionRequest,
+    PythonCompletionResponse,
+    PythonHoverRequest,
+    PythonHoverResponse,
     ProblemApiDocs,
     ProblemDetail,
     ProblemFileCreateRequest,
@@ -23,6 +27,10 @@ from app.schemas import (
     ProblemFileUpdateRequest,
     ProblemSummary,
     TestCaseView,
+)
+from app.services.python_intellisense import (
+    build_python_completion_response,
+    build_python_hover_response,
 )
 from app.services.problem_loader import find_problem_dir, seed_problems
 
@@ -215,6 +223,24 @@ async def get_problem_api_docs(
 ) -> ProblemApiDocs:
     problem = await _get_problem(problem_id, session)
     return ProblemApiDocs(problem_id=problem.id, api_docs=problem.api_docs)
+
+
+@router.post("/{problem_id}/intellisense/python", response_model=PythonCompletionResponse)
+async def get_python_intellisense(
+    problem_id: str,
+    payload: PythonCompletionRequest,
+) -> PythonCompletionResponse:
+    problem_dir = _resolve_problem_dir(problem_id)
+    return build_python_completion_response(payload, problem_dir=problem_dir)
+
+
+@router.post("/{problem_id}/intellisense/python/hover", response_model=PythonHoverResponse)
+async def get_python_hover(
+    problem_id: str,
+    payload: PythonHoverRequest,
+) -> PythonHoverResponse:
+    problem_dir = _resolve_problem_dir(problem_id)
+    return build_python_hover_response(payload, problem_dir=problem_dir)
 
 
 @router.get("/{problem_id}/files", response_model=ProblemFileTreeResponse)

@@ -86,6 +86,49 @@ class ProblemFileCreateResponse(BaseModel):
     kind: Literal["file", "directory"]
 
 
+class CodePosition(BaseModel):
+    line: int = Field(ge=1)
+    column: int = Field(ge=1)
+
+
+class IntellisenseTextEdit(BaseModel):
+    start_line: int = Field(ge=1)
+    start_column: int = Field(ge=1)
+    end_line: int = Field(ge=1)
+    end_column: int = Field(ge=1)
+    text: str
+
+
+class PythonCompletionItem(BaseModel):
+    label: str
+    kind: str
+    detail: str | None = None
+    documentation: str | None = None
+    insert_text: str | None = None
+    sort_text: str | None = None
+    additional_text_edits: list[IntellisenseTextEdit] = Field(default_factory=list)
+
+
+class PythonCompletionRequest(BaseModel):
+    code: str
+    path: str = "solution.py"
+    position: CodePosition
+
+
+class PythonCompletionResponse(BaseModel):
+    items: list[PythonCompletionItem] = Field(default_factory=list)
+
+
+class PythonHoverRequest(BaseModel):
+    code: str
+    path: str = "solution.py"
+    position: CodePosition
+
+
+class PythonHoverResponse(BaseModel):
+    contents: list[str] = Field(default_factory=list)
+
+
 class CodeSubmissionRequest(BaseModel):
     code: str
     language: str = "python"

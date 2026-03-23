@@ -92,3 +92,34 @@ export interface ProblemFileCreateResponse {
   path: string;
   kind: "file" | "directory";
 }
+
+export interface CodePosition {
+  line: number;
+  column: number;
+}
+
+export interface IntellisenseTextEdit {
+  start_line: number;
+  start_column: number;
+  end_line: number;
+  end_column: number;
+  text: string;
+}
+
+export interface PythonCompletionItem {
+  label: string;
+  kind: string;
+  detail?: string | null;
+  documentation?: string | null;
+  insert_text?: string | null;
+  sort_text?: string | null;
+  additional_text_edits: IntellisenseTextEdit[];
+}
+
+export interface PythonCompletionResponse {
+  items: PythonCompletionItem[];
+}
+
+export interface PythonHoverResponse {
+  contents: string[];
+}

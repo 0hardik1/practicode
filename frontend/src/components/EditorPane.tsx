@@ -1,6 +1,8 @@
 import Editor from "@monaco-editor/react";
+import { useEffect, useRef } from "react";
 
 import { definePractiCodeTheme } from "../editorTheme";
+import { ensurePythonIntellisense, setPythonIntellisenseProblem } from "../pythonIntellisense";
 
 export interface EditorTabView {
   id: string;
@@ -22,6 +24,7 @@ interface EditorPaneProps {
   isFileLoading: boolean;
   isFileSaving: boolean;
   liveStatus: string | null;
+  problemId: string | null;
   onActiveTabChange: (tabId: string) => void;
   onCloseTab: (tabId: string) => void;
   onCodeChange: (value: string) => void;
@@ -46,6 +49,7 @@ export function EditorPane({
   isFileLoading,
   isFileSaving,
   liveStatus,
+  problemId,
   onActiveTabChange,
   onCloseTab,
   onCodeChange,
@@ -57,6 +61,15 @@ export function EditorPane({
 }: EditorPaneProps) {
   const activeTab = tabs.find((tab) => tab.id === activeTabId) ?? tabs[0];
   const imagePreview = activeTab ? previewSource(activeTab) : null;
+  const saveActionRef = useRef(onSaveFile);
+
+  useEffect(() => {
+    saveActionRef.current = onSaveFile;
+  }, [onSaveFile]);
+
+  useEffect(() => {
+    setPythonIntellisenseProblem(problemId);
+  }, [problemId]);
 
   if (!activeTab) {
     return (
@@ -153,6 +166,12 @@ export function EditorPane({
             defaultLanguage="python"
             height="100%"
             language={activeTab.language}
+            onMount={(editor, monaco) => {
+              ensurePythonIntellisense(monaco);
+              editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
+                saveActionRef.current();
+              });
+            }}
             onChange={(value) => onCodeChange(value ?? "")}
             options={{
               automaticLayout: true,
@@ -169,7 +188,7 @@ export function EditorPane({
               smoothScrolling: true,
               tabSize: 4,
             }}
-            path={`editor:${activeTab.id}`}
+            path={`/${problemId ?? "problem"}/${activeTab.kind === "solution" ? "solution.py" : activeTab.id}`}
             theme="practicode-vscode"
             value={activeTab.content}
           />
