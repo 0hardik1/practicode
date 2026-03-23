@@ -1,0 +1,39 @@
+[
+  {
+    "id": "1",
+    "name": "alpha",
+    "status": "active",
+    "value": 10,
+    "category": "infra",
+    "email": "alpha@example.com",
+    "joined_at": "2026-01-02"
+  },
+  {
+    "id": "2",
+    "name": "beta",
+    "status": "inactive",
+    "value": 5,
+    "category": "infra",
+    "email": "beta@example.com",
+    "joined_at": "2026/01/05"
+  },
+  {
+    "id": "3",
+    "name": "gamma",
+    "status": "active",
+    "value": 15,
+    "category": "data",
+    "email": "gamma@example.com",
+    "joined_at": "01-06-2026"
+  },
+  {
+    "id": "4",
+    "name": "delta",
+    "status": "active",
+    "value": 21,
+    "category": "infra",
+    "email": "delta@example.com",
+    "joined_at": "2026-01-07T10:00:00"
+  }
+]
+

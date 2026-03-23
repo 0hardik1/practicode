@@ -1,0 +1,14 @@
+services:
+  - name: oauth-mock
+    local_url_env: OAUTH_SERVER_URL
+    local_url: "http://localhost:9001"
+    service_url_env: OAUTH_SERVER_URL
+    service_url: "http://oauth-mock.challenges.svc.cluster.local:8000"
+    env:
+      CLIENT_ID: "practicode-client"
+      CLIENT_SECRET: "practicode-secret"
+  - name: data-api
+    local_url_env: DATA_API_URL
+    local_url: "http://localhost:9002"
+    service_url_env: DATA_API_URL
+    service_url: "http://data-api.challenges.svc.cluster.local:8000"

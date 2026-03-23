@@ -1,0 +1,36 @@
+[
+  {
+    "id": "oauth-visible-basic",
+    "name": "Transforms all active items",
+    "input": {},
+    "expected": {
+      "status": "success",
+      "filtered_count": 5,
+      "total_value": 84,
+      "item_names": ["ALPHA", "DELTA", "GAMMA", "LAMBDA", "THETA"]
+    },
+    "is_hidden": false,
+    "is_sample": true,
+    "validation_type": "http_validation",
+    "validation_endpoint_local": "http://localhost:9002/data/results/validate",
+    "validation_endpoint_service": "http://data-api.challenges.svc.cluster.local:8000/data/results/validate"
+  },
+  {
+    "id": "oauth-hidden-category",
+    "name": "Applies category filter from test input",
+    "input": {
+      "category": "infra"
+    },
+    "expected": {
+      "status": "success",
+      "filtered_count": 3,
+      "total_value": 39,
+      "item_names": ["ALPHA", "DELTA", "LAMBDA"]
+    },
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "http_validation",
+    "validation_endpoint_local": "http://localhost:9002/data/results/validate",
+    "validation_endpoint_service": "http://data-api.challenges.svc.cluster.local:8000/data/results/validate"
+  }
+]

@@ -1,0 +1,40 @@
+[
+  {
+    "id": "data-visible-pagination",
+    "name": "Handles standard pagination",
+    "input": {
+      "page_size": 3
+    },
+    "expected": {
+      "status": "success",
+      "unique_records": 7,
+      "active_records": 5,
+      "domains": ["example.com", "practicode.dev"],
+      "null_name_count": 1
+    },
+    "is_hidden": false,
+    "is_sample": true,
+    "validation_type": "http_validation",
+    "validation_endpoint_local": "http://localhost:9002/data/results/validate",
+    "validation_endpoint_service": "http://data-api.challenges.svc.cluster.local:8000/data/results/validate"
+  },
+  {
+    "id": "data-hidden-small-pages",
+    "name": "Handles smaller page sizes",
+    "input": {
+      "page_size": 2
+    },
+    "expected": {
+      "status": "success",
+      "unique_records": 7,
+      "active_records": 5,
+      "domains": ["example.com", "practicode.dev"],
+      "null_name_count": 1
+    },
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "http_validation",
+    "validation_endpoint_local": "http://localhost:9002/data/results/validate",
+    "validation_endpoint_service": "http://data-api.challenges.svc.cluster.local:8000/data/results/validate"
+  }
+]

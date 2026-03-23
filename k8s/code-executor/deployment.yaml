@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code-executor
+  namespace: practicode
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: code-executor
+  template:
+    metadata:
+      labels:
+        app: code-executor
+    spec:
+      containers:
+        - name: code-executor
+          image: practicode-code-executor:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PRACTICODE_API_CALLBACK_URL
+              value: http://api-server-svc.practicode.svc.cluster.local:8000/api/internal/results
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 1
+              memory: 768Mi
+

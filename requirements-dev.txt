@@ -1,0 +1,6 @@
+-r api-server/requirements.txt
+-r code-executor/requirements.txt
+-r runner-python/requirements.txt
+-r challenges/oauth-mock/requirements.txt
+-r challenges/data-api/requirements.txt
+-r challenges/image-service/requirements.txt

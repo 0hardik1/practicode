@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-server
+  namespace: practicode
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-server
+  template:
+    metadata:
+      labels:
+        app: api-server
+    spec:
+      containers:
+        - name: api-server
+          image: practicode-api-server:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: PRACTICODE_DATABASE_URL
+              value: sqlite+aiosqlite:////data/practicode.db
+            - name: PRACTICODE_EXECUTOR_BASE_URL
+              value: http://code-executor-svc.practicode.svc.cluster.local:8080
+            - name: PRACTICODE_EXECUTION_ENVIRONMENT
+              value: cluster
+            - name: PRACTICODE_PROBLEMS_DIR
+              value: /app/problems
+          volumeMounts:
+            - name: api-data
+              mountPath: /data
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+      volumes:
+        - name: api-data
+          emptyDir: {}

@@ -1,0 +1,14 @@
+id: "002-data-transform-pipeline"
+slug: "data-transform-pipeline"
+title: "Data Transform Pipeline"
+difficulty: "easy"
+tags: ["api", "pagination", "json", "data-cleaning"]
+time_limit_seconds: 30
+memory_limit_mb: 256
+description_file: "description.md"
+api_docs_file: "api-docs.md"
+starter_code:
+  python: "starter.py"
+test_cases_file: "tests.json"
+services_file: "services.yaml"
+

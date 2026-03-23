@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: code-executor-svc
+  namespace: practicode
+spec:
+  selector:
+    app: code-executor
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+

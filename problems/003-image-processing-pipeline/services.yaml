@@ -1,0 +1,6 @@
+services:
+  - name: image-service
+    local_url_env: IMAGE_SERVICE_URL
+    local_url: "http://localhost:9003"
+    service_url_env: IMAGE_SERVICE_URL
+    service_url: "http://image-service.challenges.svc.cluster.local:8000"

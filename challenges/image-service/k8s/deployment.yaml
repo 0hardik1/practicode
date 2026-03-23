@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-service
+  namespace: challenges
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image-service
+  template:
+    metadata:
+      labels:
+        app: image-service
+    spec:
+      containers:
+        - name: image-service
+          image: practicode-image-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 384Mi
+

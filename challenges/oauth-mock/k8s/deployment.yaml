@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oauth-mock
+  namespace: challenges
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oauth-mock
+  template:
+    metadata:
+      labels:
+        app: oauth-mock
+    spec:
+      containers:
+        - name: oauth-mock
+          image: practicode-oauth-mock:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: CLIENT_ID
+              value: practicode-client
+            - name: CLIENT_SECRET
+              value: practicode-secret
+            - name: TOKEN_TTL_SECONDS
+              value: "300"
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+

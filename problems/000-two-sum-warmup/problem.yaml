@@ -1,0 +1,13 @@
+id: "000-two-sum-warmup"
+slug: "two-sum-warmup"
+title: "Two Sum Warmup"
+difficulty: "easy"
+tags: ["arrays", "warmup", "presolved", "intro"]
+time_limit_seconds: 10
+memory_limit_mb: 128
+description_file: "description.md"
+api_docs_file: "api-docs.md"
+starter_code:
+  python: "starter.py"
+test_cases_file: "tests.json"
+

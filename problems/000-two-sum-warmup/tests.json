@@ -1,0 +1,27 @@
+[
+  {
+    "id": "two-sum-visible-basic",
+    "name": "Finds the standard pair",
+    "input": {
+      "nums": [2, 7, 11, 15],
+      "target": 9
+    },
+    "expected": [0, 1],
+    "is_hidden": false,
+    "is_sample": true,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "two-sum-hidden-second-pair",
+    "name": "Finds a pair later in the array",
+    "input": {
+      "nums": [3, 2, 4],
+      "target": 6
+    },
+    "expected": [1, 2],
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  }
+]
+

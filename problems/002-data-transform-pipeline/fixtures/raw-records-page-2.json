@@ -1,0 +1,39 @@
+[
+  {
+    "id": "5",
+    "name": null,
+    "status": "active",
+    "value": 12,
+    "category": "data",
+    "email": "gamma@example.com",
+    "joined_at": "2026-01-07"
+  },
+  {
+    "id": "6",
+    "name": "theta",
+    "status": "active",
+    "value": 30,
+    "category": "ops",
+    "email": "theta@practicode.dev",
+    "joined_at": "2026-01-08"
+  },
+  {
+    "id": "7",
+    "name": "iota",
+    "status": "inactive",
+    "value": 9,
+    "category": "ops",
+    "email": "iota@practicode.dev",
+    "joined_at": "2026-01-09"
+  },
+  {
+    "id": "8",
+    "name": "lambda",
+    "status": "active",
+    "value": 8,
+    "category": "infra",
+    "email": "lambda@example.com",
+    "joined_at": "2026-01-10"
+  }
+]
+

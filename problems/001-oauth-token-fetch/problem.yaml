@@ -1,0 +1,14 @@
+id: "001-oauth-token-fetch"
+slug: "oauth-token-fetch"
+title: "OAuth Token Fetch & Data Retrieval"
+difficulty: "medium"
+tags: ["api", "oauth", "http", "json"]
+time_limit_seconds: 30
+memory_limit_mb: 256
+description_file: "description.md"
+api_docs_file: "api-docs.md"
+starter_code:
+  python: "starter.py"
+test_cases_file: "tests.json"
+services_file: "services.yaml"
+

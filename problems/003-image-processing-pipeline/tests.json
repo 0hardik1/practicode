@@ -1,0 +1,30 @@
+[
+  {
+    "id": "image-visible-basic",
+    "name": "Processes and uploads every image",
+    "input": {},
+    "expected": {
+      "status": "success",
+      "processed_count": 3
+    },
+    "is_hidden": false,
+    "is_sample": true,
+    "validation_type": "http_validation",
+    "validation_endpoint_local": "http://localhost:9003/images/validate-all",
+    "validation_endpoint_service": "http://image-service.challenges.svc.cluster.local:8000/images/validate-all"
+  },
+  {
+    "id": "image-hidden-submit",
+    "name": "Submit path re-runs the full image suite",
+    "input": {},
+    "expected": {
+      "status": "success",
+      "processed_count": 3
+    },
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "http_validation",
+    "validation_endpoint_local": "http://localhost:9003/images/validate-all",
+    "validation_endpoint_service": "http://image-service.challenges.svc.cluster.local:8000/images/validate-all"
+  }
+]
