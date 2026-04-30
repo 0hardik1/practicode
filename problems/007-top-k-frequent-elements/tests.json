@@ -1,0 +1,50 @@
+[
+  {
+    "id": "top-k-frequent-visible-basic",
+    "name": "Standard top-2 example",
+    "input": {
+      "nums": [1, 1, 1, 2, 2, 3],
+      "k": 2
+    },
+    "expected": [1, 2],
+    "is_hidden": false,
+    "is_sample": true,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "top-k-frequent-hidden-singleton",
+    "name": "Single element with k=1",
+    "input": {
+      "nums": [1],
+      "k": 1
+    },
+    "expected": [1],
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "top-k-frequent-hidden-all-distinct",
+    "name": "All elements distinct, k equals total",
+    "input": {
+      "nums": [1, 2],
+      "k": 2
+    },
+    "expected": [1, 2],
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "top-k-frequent-hidden-three",
+    "name": "Top three of mixed frequencies",
+    "input": {
+      "nums": [4, 4, 4, 5, 5, 6, 6, 6, 6, 7],
+      "k": 3
+    },
+    "expected": [4, 5, 6],
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  }
+]

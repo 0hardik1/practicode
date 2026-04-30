@@ -1,0 +1,11 @@
+id: "006-group-anagrams"
+slug: "group-anagrams"
+title: "Group Anagrams"
+difficulty: "medium"
+tags: ["strings", "hashing", "blind75"]
+time_limit_seconds: 10
+memory_limit_mb: 256
+description_file: "description.md"
+starter_code:
+  python: "starter.py"
+test_cases_file: "tests.json"

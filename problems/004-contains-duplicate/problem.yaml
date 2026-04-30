@@ -1,0 +1,11 @@
+id: "004-contains-duplicate"
+slug: "contains-duplicate"
+title: "Contains Duplicate"
+difficulty: "easy"
+tags: ["arrays", "hashing", "blind75"]
+time_limit_seconds: 10
+memory_limit_mb: 128
+description_file: "description.md"
+starter_code:
+  python: "starter.py"
+test_cases_file: "tests.json"

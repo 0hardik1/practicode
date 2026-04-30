@@ -1,0 +1,46 @@
+[
+  {
+    "id": "buy-sell-stock-visible-basic",
+    "name": "Profit available later in the series",
+    "input": {
+      "prices": [7, 1, 5, 3, 6, 4]
+    },
+    "expected": 5,
+    "is_hidden": false,
+    "is_sample": true,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "buy-sell-stock-hidden-decreasing",
+    "name": "Strictly decreasing prices yield no profit",
+    "input": {
+      "prices": [7, 6, 4, 3, 1]
+    },
+    "expected": 0,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "buy-sell-stock-hidden-single-day",
+    "name": "Single-day series cannot trade",
+    "input": {
+      "prices": [1]
+    },
+    "expected": 0,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "buy-sell-stock-hidden-min-after-peak",
+    "name": "Minimum after peak does not become a buy point",
+    "input": {
+      "prices": [2, 4, 1]
+    },
+    "expected": 2,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  }
+]

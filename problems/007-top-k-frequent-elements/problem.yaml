@@ -1,0 +1,11 @@
+id: "007-top-k-frequent-elements"
+slug: "top-k-frequent-elements"
+title: "Top K Frequent Elements"
+difficulty: "medium"
+tags: ["arrays", "hashing", "heap", "blind75"]
+time_limit_seconds: 10
+memory_limit_mb: 256
+description_file: "description.md"
+starter_code:
+  python: "starter.py"
+test_cases_file: "tests.json"

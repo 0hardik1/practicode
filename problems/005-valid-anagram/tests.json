@@ -1,0 +1,50 @@
+[
+  {
+    "id": "valid-anagram-visible-basic",
+    "name": "Classic anagram pair",
+    "input": {
+      "s": "anagram",
+      "t": "nagaram"
+    },
+    "expected": true,
+    "is_hidden": false,
+    "is_sample": true,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "valid-anagram-hidden-different-letters",
+    "name": "Same length but different letter set",
+    "input": {
+      "s": "rat",
+      "t": "car"
+    },
+    "expected": false,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "valid-anagram-hidden-empty",
+    "name": "Two empty strings are anagrams",
+    "input": {
+      "s": "",
+      "t": ""
+    },
+    "expected": true,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "valid-anagram-hidden-different-length",
+    "name": "Different lengths cannot be anagrams",
+    "input": {
+      "s": "ab",
+      "t": "a"
+    },
+    "expected": false,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  }
+]

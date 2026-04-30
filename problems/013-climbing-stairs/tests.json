@@ -1,0 +1,46 @@
+[
+  {
+    "id": "climbing-stairs-visible-basic",
+    "name": "Two stairs, two ways",
+    "input": {
+      "n": 2
+    },
+    "expected": 2,
+    "is_hidden": false,
+    "is_sample": true,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "climbing-stairs-hidden-three",
+    "name": "Three stairs, three ways",
+    "input": {
+      "n": 3
+    },
+    "expected": 3,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "climbing-stairs-hidden-one",
+    "name": "Single stair has one way",
+    "input": {
+      "n": 1
+    },
+    "expected": 1,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "climbing-stairs-hidden-large",
+    "name": "Larger input exercises iterative DP",
+    "input": {
+      "n": 10
+    },
+    "expected": 89,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  }
+]

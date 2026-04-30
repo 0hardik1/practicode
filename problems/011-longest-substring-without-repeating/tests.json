@@ -1,0 +1,46 @@
+[
+  {
+    "id": "longest-substring-visible-basic",
+    "name": "Standard distinct-window example",
+    "input": {
+      "s": "abcabcbb"
+    },
+    "expected": 3,
+    "is_hidden": false,
+    "is_sample": true,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "longest-substring-hidden-all-same",
+    "name": "All identical characters",
+    "input": {
+      "s": "bbbbb"
+    },
+    "expected": 1,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "longest-substring-hidden-tricky",
+    "name": "Window that must skip past an earlier duplicate",
+    "input": {
+      "s": "pwwkew"
+    },
+    "expected": 3,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "longest-substring-hidden-empty",
+    "name": "Empty input has length zero",
+    "input": {
+      "s": ""
+    },
+    "expected": 0,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  }
+]

@@ -1,0 +1,11 @@
+id: "010-best-time-to-buy-and-sell-stock"
+slug: "best-time-to-buy-and-sell-stock"
+title: "Best Time to Buy and Sell Stock"
+difficulty: "easy"
+tags: ["arrays", "sliding-window", "dynamic-programming", "blind75"]
+time_limit_seconds: 10
+memory_limit_mb: 128
+description_file: "description.md"
+starter_code:
+  python: "starter.py"
+test_cases_file: "tests.json"
