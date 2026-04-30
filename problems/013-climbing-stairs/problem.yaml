@@ -1,0 +1,11 @@
+id: "013-climbing-stairs"
+slug: "climbing-stairs"
+title: "Climbing Stairs"
+difficulty: "easy"
+tags: ["dynamic-programming", "math", "blind75"]
+time_limit_seconds: 10
+memory_limit_mb: 128
+description_file: "description.md"
+starter_code:
+  python: "starter.py"
+test_cases_file: "tests.json"

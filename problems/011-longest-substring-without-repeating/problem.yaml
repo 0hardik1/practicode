@@ -1,0 +1,11 @@
+id: "011-longest-substring-without-repeating"
+slug: "longest-substring-without-repeating"
+title: "Longest Substring Without Repeating Characters"
+difficulty: "medium"
+tags: ["strings", "sliding-window", "hashing", "blind75"]
+time_limit_seconds: 10
+memory_limit_mb: 256
+description_file: "description.md"
+starter_code:
+  python: "starter.py"
+test_cases_file: "tests.json"

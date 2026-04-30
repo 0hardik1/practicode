@@ -1,0 +1,11 @@
+id: "012-valid-parentheses"
+slug: "valid-parentheses"
+title: "Valid Parentheses"
+difficulty: "easy"
+tags: ["strings", "stack", "blind75"]
+time_limit_seconds: 10
+memory_limit_mb: 128
+description_file: "description.md"
+starter_code:
+  python: "starter.py"
+test_cases_file: "tests.json"

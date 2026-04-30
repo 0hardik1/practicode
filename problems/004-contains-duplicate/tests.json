@@ -1,0 +1,46 @@
+[
+  {
+    "id": "contains-duplicate-visible-basic",
+    "name": "Detects an obvious duplicate",
+    "input": {
+      "nums": [1, 2, 3, 1]
+    },
+    "expected": true,
+    "is_hidden": false,
+    "is_sample": true,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "contains-duplicate-hidden-distinct",
+    "name": "All distinct values returns false",
+    "input": {
+      "nums": [1, 2, 3, 4]
+    },
+    "expected": false,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "contains-duplicate-hidden-empty",
+    "name": "Empty array has no duplicates",
+    "input": {
+      "nums": []
+    },
+    "expected": false,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "contains-duplicate-hidden-many",
+    "name": "Multiple repeats anywhere in the array",
+    "input": {
+      "nums": [1, 1, 1, 3, 3, 4, 3, 2, 4, 2]
+    },
+    "expected": true,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  }
+]

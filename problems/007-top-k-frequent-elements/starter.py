@@ -1,0 +1,16 @@
+import json
+import os
+
+
+def solve(nums: list[int], k: int) -> list[int]:
+    pass
+
+
+def main() -> None:
+    payload = json.loads(os.environ.get("TEST_INPUT", "{}"))
+    result = solve(payload["nums"], payload["k"])
+    print(json.dumps(result))
+
+
+if __name__ == "__main__":
+    main()

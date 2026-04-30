@@ -1,0 +1,46 @@
+[
+  {
+    "id": "group-anagrams-visible-basic",
+    "name": "Three anagram groups",
+    "input": {
+      "strs": ["eat", "tea", "tan", "ate", "nat", "bat"]
+    },
+    "expected": [["ate", "eat", "tea"], ["bat"], ["nat", "tan"]],
+    "is_hidden": false,
+    "is_sample": true,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "group-anagrams-hidden-empty-string",
+    "name": "Single empty string is its own group",
+    "input": {
+      "strs": [""]
+    },
+    "expected": [[""]],
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "group-anagrams-hidden-single-letter",
+    "name": "Single-character input",
+    "input": {
+      "strs": ["a"]
+    },
+    "expected": [["a"]],
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "group-anagrams-hidden-mixed",
+    "name": "Multiple anagrams plus a singleton",
+    "input": {
+      "strs": ["abc", "cba", "bac", "xyz"]
+    },
+    "expected": [["abc", "bac", "cba"], ["xyz"]],
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  }
+]

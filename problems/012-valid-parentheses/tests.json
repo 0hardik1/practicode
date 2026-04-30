@@ -1,0 +1,46 @@
+[
+  {
+    "id": "valid-parentheses-visible-basic",
+    "name": "All three bracket pairs in sequence",
+    "input": {
+      "s": "()[]{}"
+    },
+    "expected": true,
+    "is_hidden": false,
+    "is_sample": true,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "valid-parentheses-hidden-mismatch",
+    "name": "Mismatched bracket types",
+    "input": {
+      "s": "(]"
+    },
+    "expected": false,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "valid-parentheses-hidden-interleaved",
+    "name": "Interleaved closes break ordering",
+    "input": {
+      "s": "([)]"
+    },
+    "expected": false,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "valid-parentheses-hidden-empty",
+    "name": "Empty string is trivially valid",
+    "input": {
+      "s": ""
+    },
+    "expected": true,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  }
+]

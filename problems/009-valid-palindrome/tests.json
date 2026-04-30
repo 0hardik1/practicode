@@ -1,0 +1,46 @@
+[
+  {
+    "id": "valid-palindrome-visible-basic",
+    "name": "Classic palindromic phrase",
+    "input": {
+      "s": "A man, a plan, a canal: Panama"
+    },
+    "expected": true,
+    "is_hidden": false,
+    "is_sample": true,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "valid-palindrome-hidden-not-palindrome",
+    "name": "Non-palindromic phrase",
+    "input": {
+      "s": "race a car"
+    },
+    "expected": false,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "valid-palindrome-hidden-only-spaces",
+    "name": "String with only non-alphanumerics is empty after cleaning",
+    "input": {
+      "s": " "
+    },
+    "expected": true,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  },
+  {
+    "id": "valid-palindrome-hidden-mixed-alnum",
+    "name": "Digit and letter must compare case-insensitively but stay distinct",
+    "input": {
+      "s": "0P"
+    },
+    "expected": false,
+    "is_hidden": true,
+    "is_sample": false,
+    "validation_type": "exact_match"
+  }
+]
